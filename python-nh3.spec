@@ -1,6 +1,8 @@
+%global debug_package %{nil}
+
 Name:		python-nh3
 Version:	0.2.21
-Release:	5
+Release:	6
 Source0:	https://files.pythonhosted.org/packages/source/n/nh3/nh3-%{version}.tar.gz
 Source1:    %{name}-%{version}-vendor.tar.gz
 Summary:	Python binding to Ammonia HTML sanitizer Rust crate
@@ -11,10 +13,8 @@ BuildRequires:	python
 BuildRequires:	python-maturin
 BuildRequires:	cargo
 BuildSystem:	python
-BuildArch:	noarch
 
-Provides: python3.11dist(nh3)
-Provides: nh3>=0.2.14
+
 
 %description
 Python binding to Ammonia HTML sanitizer Rust crate
@@ -29,7 +29,10 @@ replace-with = "vendored-sources"
 [source.vendored-sources]
 directory = "vendor"
 EOF
+
+%install -a
 mkdir -p %{buildroot}/usr/lib/python3.11/site-packages
 mkdir -p %{buildroot}/usr/lib64/python3.11/site-packages
+
 %files
-%{_libdir}/python3.11/site-packages/
+%{_libdir}/*
