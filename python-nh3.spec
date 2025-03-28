@@ -30,7 +30,7 @@ directory = "vendor"
 EOF
 
 %install
-mkdir -p %{buildroot}/usr/lib//python3.11/site-packages
-
+mkdir -p %{buildroot}/usr/lib/python3.11/site-packages
+mkdir -p %{buildroot}/usr/lib64/python3.11/site-packages
 %files
 %{_libdir}/python3.11/site-packages/
