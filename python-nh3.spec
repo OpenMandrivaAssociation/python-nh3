@@ -1,6 +1,6 @@
 Name:		python-nh3
 Version:	0.2.21
-Release:	2
+Release:	3
 Source0:	https://files.pythonhosted.org/packages/source/n/nh3/nh3-%{version}.tar.gz
 Source1:    %{name}-%{version}-vendor.tar.gz
 Summary:	Python binding to Ammonia HTML sanitizer Rust crate
@@ -14,7 +14,7 @@ BuildSystem:	python
 BuildArch:	noarch
 
 Provides: python3.11dist(nh3)
-provides: nh3
+Provides: nh3
 
 %description
 Python binding to Ammonia HTML sanitizer Rust crate
