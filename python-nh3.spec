@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:		python-nh3
 Version:	0.2.21
 Release:	5
@@ -11,10 +13,8 @@ BuildRequires:	python
 BuildRequires:	python-maturin
 BuildRequires:	cargo
 BuildSystem:	python
-BuildArch:	noarch
 
-Provides: python3.11dist(nh3)
-Provides: nh3>=0.2.14
+
 
 %description
 Python binding to Ammonia HTML sanitizer Rust crate
@@ -30,8 +30,9 @@ replace-with = "vendored-sources"
 directory = "vendor"
 EOF
 
-%install
+%install -a
 mkdir -p %{buildroot}/usr/lib/python3.11/site-packages
 mkdir -p %{buildroot}/usr/lib64/python3.11/site-packages
+
 %files
-%{_libdir}/python3.11/site-packages/
+%{_libdir}/*
