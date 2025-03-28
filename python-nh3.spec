@@ -13,8 +13,7 @@ BuildRequires:	cargo
 BuildSystem:	python
 BuildArch:	noarch
 
-Provides: python3.11dist(nh3)
-Provides: nh3
+Provides: nh3>=0.2.14
 
 %description
 Python binding to Ammonia HTML sanitizer Rust crate
