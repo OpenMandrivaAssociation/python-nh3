@@ -2,7 +2,7 @@
 %define module nh3
 
 Name:		python-nh3
-Version:	0.3.4
+Version:	0.3.5
 Release:	1
 Summary:	Python binding to Ammonia HTML sanitizer Rust crate
 License:	MIT
