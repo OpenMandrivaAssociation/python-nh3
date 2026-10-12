@@ -13,22 +13,22 @@ Source1:	%{name}-%{version}-vendor.tar.xz
 
 BuildSystem:	python
 BuildRequires:	cargo
-BuildRequires:	pkgconfig(python3)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	python%{pyver}dist(maturin)
 BuildRequires:	python%{pyver}dist(pip)
 BuildRequires:	python%{pyver}dist(wheel)
-BuildRequires:	rust-packaging
 
 %description
 Python binding to Ammonia HTML sanitizer Rust crate
 
 %prep -a
-# extract vendered sources
-tar xf %{SOURCE1}
-# prep vendorered crates
-%cargo_prep -v vendor/
-# create .cargo/config file from vendoring output
-cat >>.cargo/config <<EOF
+# The crates are already vendored, so this build does not need rust-packaging.
+tar -xf %{SOURCE1}
+mkdir -p .cargo
+cat > .cargo/config.toml << 'EOF'
+[net]
+offline = true
+
 [source.crates-io]
 replace-with = "vendored-sources"
 
@@ -37,11 +37,13 @@ directory = "vendor"
 EOF
 
 %build -p
+export CARGO_NET_OFFLINE=true
 export RUSTFLAGS="-lpython%{pyver}"
 export CARGO_HOME=$PWD/.cargo
-# sort out crate licenses
-%cargo_license_summary
-%{cargo_license} > LICENSES.dependencies
+cargo tree --workspace --offline --edges no-build,no-dev,no-proc-macro \
+	--prefix none --format '{l}: {p}' \
+	| sed -e "s: ($(pwd)[^)]*)::g" -e 's: / :/:g' -e 's:/: OR :g' \
+	| sort -u > LICENSES.dependencies
 
 %files
 %doc README.md
