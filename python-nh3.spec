@@ -3,7 +3,7 @@
 
 Name:		python-nh3
 Version:	0.3.5
-Release:	1
+Release:	2
 Summary:	Python binding to Ammonia HTML sanitizer Rust crate
 License:	MIT
 Group:		Development/Python
